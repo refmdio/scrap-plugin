@@ -1,0 +1,20 @@
+{
+  "name": "@refmdio/scrap-plugin",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/index.tsx --bundle --format=esm --platform=browser --target=es2020 --jsx=automatic --outfile=dist/index.mjs"
+  },
+  "dependencies": {
+    "@refmdio/plugin-sdk": "^0.1.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.24",
+    "@types/react-dom": "^18.3.7",
+    "esbuild": "^0.21.5",
+    "typescript": "^5.9.2"
+  }
+}

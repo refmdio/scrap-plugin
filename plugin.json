@@ -1,0 +1,23 @@
+{
+  "id": "scrap",
+  "name": "Scrap",
+  "version": "0.1.0",
+  "author": "RefMD Team",
+  "repository": "https://github.com/refmdio/scrap-plugin",
+  "abi": "refmd-plugin/v1",
+  "mounts": ["/scrap/*"],
+  "frontend": { "entry": "index.mjs", "mode": "esm" },
+  "backend": { "wasm": "backend/plugin.wasm" },
+  "permissions": ["doc.read","doc.write"],
+  "commands": ["scrap.create","scrap.create_record","scrap.update_record","scrap.delete_record"],
+  "ui": {
+    "toolbar": [
+      { "title": "New Scrap", "action": "scrap.create" }
+    ],
+    "fileTree": {
+      "icon": "NotebookText",
+      "identify": { "type": "kvFlag", "key": "meta", "path": "isScrap", "equals": true }
+    }
+  }
+}
+
