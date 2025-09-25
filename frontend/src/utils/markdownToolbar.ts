@@ -13,7 +13,6 @@ export type ToolbarAction =
   | 'list'
   | 'list-ordered'
   | 'table'
-
 export function uploadResultToMarkdown(result: { url: string; filename: string; contentType?: string | null }) {
   const { url, filename, contentType } = result
   const label = filename.replace(/\]/g, '')
