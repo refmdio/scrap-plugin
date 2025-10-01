@@ -43,7 +43,7 @@ export function SidebarContent({ filters, onSearchChange, onToggleTag, tagCloud,
 
       <div className="space-y-2">
         <div className="sidebar-title">Tags</div>
-        <div className="flex flex-wrap gap-2" data-id="tags">
+        <div className="tags-list flex flex-wrap gap-2" data-id="tags">
           {tagCloud.length ? (
             tagCloud.map(([tag, count]) => (
               <button

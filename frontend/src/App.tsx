@@ -60,6 +60,8 @@ const STYLE = `
 .scrap .btn-ghost.compact{ padding:0 0.5rem; }
 .scrap .btn-icon{ width:1.75rem; justify-content:center; }
 .scrap .meta-block{ display:flex; align-items:center; gap:0.5rem; color: var(--muted-foreground,#666); font-size:0.75rem; }
+.scrap .sidebar-panel{ width:18rem; flex-shrink:0; }
+.scrap .tags-list{ display:flex; flex-wrap:wrap; gap:0.5rem; width:100%; }
 .scrap .meta-block .avatar{ height:2rem; width:2rem; border-radius:999px; background: var(--muted,#eee); display:flex; align-items:center; justify-content:center; font-size:0.875rem; font-weight:600; }
 .scrap .meta-inline{ display:flex; align-items:center; gap:0.5rem; font-size:0.75rem; color: var(--muted-foreground,#666); }
 .scrap .meta-inline span{ display:flex; align-items:center; gap:0.25rem; }
@@ -275,7 +277,7 @@ export function App({ host }: { host: Host }) {
               </div>
 
               {!isCompact ? (
-                <div className="w-72">
+                <div className="sidebar-panel">
                   <Sidebar
                     filters={state.filters}
                     onSearchChange={setSearch}

@@ -1,7 +1,7 @@
 {
   "id": "scrap",
   "name": "Scrap",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "author": "RefMD Team",
   "repository": "https://github.com/refmdio/scrap-plugin",
   "abi": "refmd-plugin/v1",
