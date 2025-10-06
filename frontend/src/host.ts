@@ -12,11 +12,13 @@ export type CanOpenContext = {
 
 export async function canOpen(docId: string, ctx: CanOpenContext = {}): Promise<boolean> {
   try {
-    if (typeof ctx.host?.api?.getKv !== 'function') {
-      throw new Error('host.api.getKv not available')
-    }
-    const result = await ctx.host.api.getKv('scrap', docId, 'meta', ctx.token ?? undefined)
-    const value = result?.value
+    const response = await ctx.host?.exec?.('host.kv.get', {
+      docId,
+      key: 'meta',
+      token: ctx.token ?? undefined,
+    })
+    if (response?.ok === false) return false
+    const value = response?.data?.value ?? response?.data
     return Boolean(value && (value.isScrap ?? value.is_scrap))
   } catch (err) {
     console.warn('[scrap] canOpen check failed', err)
