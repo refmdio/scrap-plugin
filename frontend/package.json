@@ -1,7 +1,7 @@
 {
   "name": "@refmdio/scrap-plugin",
   "private": true,
-  "version": "0.1.3",
+  "version": "0.1.4",
   "type": "module",
   "scripts": {
     "build": "esbuild src/index.tsx --bundle --format=esm --platform=browser --target=es2020 --jsx=automatic --outfile=dist/index.mjs"
