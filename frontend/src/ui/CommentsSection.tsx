@@ -53,7 +53,11 @@ export function CommentsSection({
   onSubmit,
   open,
 }: CommentsSectionProps) {
-  const { textareaRef, isDragging, textareaEvents } = useMarkdownTextarea({ uploader, onChange: onDraftChange })
+  const { textareaRef, isDragging, textareaEvents } = useMarkdownTextarea({
+    uploader,
+    onChange: onDraftChange,
+    value: draft,
+  })
   const [expanded, setExpanded] = useState(Boolean(draft))
 
   const textareaClass = useMemo(() => {

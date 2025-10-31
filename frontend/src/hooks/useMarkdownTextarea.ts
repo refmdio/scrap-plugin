@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useLayoutEffect, useRef, useState } from 'react'
 import type React from 'react'
 import type { createUploader } from '@refmdio/plugin-sdk'
 
@@ -7,12 +7,30 @@ import { uploadResultToMarkdown } from '../utils/markdownToolbar'
 export type MarkdownTextareaOptions = {
   uploader: ReturnType<typeof createUploader>
   onChange: (value: string) => void
+  value?: string
 }
 
-export function useMarkdownTextarea({ uploader, onChange }: MarkdownTextareaOptions) {
+export function useMarkdownTextarea({ uploader, onChange, value }: MarkdownTextareaOptions) {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
   const dragDepth = useRef(0)
+  const minHeightRef = useRef<number | null>(null)
   const [isDragging, setIsDragging] = useState(false)
+
+  const resizeTextarea = useCallback(() => {
+    const textarea = textareaRef.current
+    if (!textarea) return
+    if (typeof window === 'undefined') return
+
+    if (minHeightRef.current === null) {
+      const computedMinHeight = Number.parseFloat(window.getComputedStyle(textarea).minHeight || '0')
+      minHeightRef.current = Number.isFinite(computedMinHeight) ? computedMinHeight : 0
+    }
+
+    const minHeight = minHeightRef.current ?? 0
+    textarea.style.height = 'auto'
+    const nextHeight = Math.max(textarea.scrollHeight, minHeight)
+    textarea.style.height = `${nextHeight}px`
+  }, [])
 
   const appendSnippets = useCallback(
     (snippets: string[]) => {
@@ -25,9 +43,10 @@ export function useMarkdownTextarea({ uploader, onChange }: MarkdownTextareaOpti
       const nextValue = `${current}${needsNL}${joined}\n`
       textarea.value = nextValue
       textarea.selectionStart = textarea.selectionEnd = textarea.value.length
+      resizeTextarea()
       onChange(nextValue)
     },
-    [onChange],
+    [onChange, resizeTextarea],
   )
 
   const handleFiles = useCallback(
@@ -85,6 +104,10 @@ export function useMarkdownTextarea({ uploader, onChange }: MarkdownTextareaOpti
     event.preventDefault()
     event.dataTransfer.dropEffect = 'copy'
   }, [])
+
+  useLayoutEffect(() => {
+    resizeTextarea()
+  }, [resizeTextarea, value])
 
   return {
     textareaRef,

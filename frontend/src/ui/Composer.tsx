@@ -39,7 +39,7 @@ const ACTIONS: Array<ToolbarAction | 'divider'> = [
 ]
 
 export function Composer({ host, renderer, uploader, value, tab, statusMessage, docId, token, onChange, onTabChange, onSubmit }: ComposerProps) {
-  const { textareaRef, isDragging, textareaEvents } = useMarkdownTextarea({ uploader, onChange })
+  const { textareaRef, isDragging, textareaEvents } = useMarkdownTextarea({ uploader, onChange, value })
 
   const handleToolbar = useCallback(
     (action: ToolbarAction) => {

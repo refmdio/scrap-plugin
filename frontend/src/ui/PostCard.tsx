@@ -87,6 +87,7 @@ export function PostCard({
   const { textareaRef, isDragging, textareaEvents } = useMarkdownTextarea({
     uploader,
     onChange: (value) => onUpdateEditDraft(post.id, value),
+    value: editDraft?.draft ?? '',
   })
 
   const editClass = isDragging
